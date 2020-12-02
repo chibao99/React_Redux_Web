@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Header } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import ProductRelation from "./ProductRelation";
 import { useSelector } from "react-redux";
 import Detail from "./Detail";

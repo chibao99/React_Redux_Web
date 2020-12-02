@@ -8,7 +8,6 @@ import {
   Button,
   Icon,
 } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../actions/auth";

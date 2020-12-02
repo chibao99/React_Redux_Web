@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Container, Input } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import ProductItems from "./ProductItems";
 import { useSelector } from "react-redux";
 

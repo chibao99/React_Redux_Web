@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Menu, Button, Icon, Image } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser, logout } from "../../actions/auth";

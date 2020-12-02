@@ -8,12 +8,10 @@ import {
   Button,
   Icon,
 } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/auth";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import quan from "./Address/quan_huyen.json";
 import tinh from "./Address/tinh_tp.json";
 const Register = () => {

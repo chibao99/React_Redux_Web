@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "semantic-ui-css/semantic.min.css";
 import { Grid, Segment, Table, Button, Input, Icon } from "semantic-ui-react";
 import request from "../../actions/agent";
 

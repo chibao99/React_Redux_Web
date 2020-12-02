@@ -1,6 +1,5 @@
 import React from "react";
 import { Table, Button, Icon, Image } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

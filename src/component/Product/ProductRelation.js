@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Image, Grid } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { Link } from "react-router-dom";
 
 const ProductRelation = ({ product }) => {

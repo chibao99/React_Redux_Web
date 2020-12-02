@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Image, Header, Segment, Button } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { payment } from "../../actions/checkout";
 import { edit_inventory } from "../../actions/product";
@@ -10,6 +9,7 @@ const Checkout = () => {
   //state redux
   const cart = useSelector((state) => state.cart);
   const user1 = useSelector((state) => state.auth.user);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
 
   //dispatch
   const dispatch = useDispatch();
@@ -21,10 +21,13 @@ const Checkout = () => {
     return result;
   };
 
-
   let address = `${user1.address}, ${user1.dis}, ${user1.city}`;
 
   const history = useHistory();
+
+  if (isAdmin) {
+    history.replace("/san-pham");
+  }
 
   const total = totalCart(cart);
   const paymentOrder = () => {

@@ -8,8 +8,8 @@ import {
   Item,
   Form,
   Message,
+  Modal,
 } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getCheckout } from "../../actions/checkout";
 import quan from "./Address/quan_huyen.json";
@@ -33,8 +33,9 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getCheckout());
-    document.title = "Trang Cá Nhân"
+    document.title = "Trang Cá Nhân";
   }, [getCheckout]);
+
   const display = () => {
     if (user) {
       return (
@@ -47,18 +48,31 @@ const Profile = () => {
             </Item.Description>
             <Item.Description>Số Điện Thoại: {user.phone}</Item.Description>
             <Item.Extra>
-              <Button
-                negative
-                icon
-                floated="right"
-                labelPosition="right"
-                onClick={() => {
-                  changeStatus();
-                }}
-              >
-                Sửa Thông Tin
-                <Icon name="users" />
-              </Button>
+              <Button.Group>
+                <Button
+                  negative
+                  icon
+                  floated="right"
+                  labelPosition="left"
+                  onClick={() => {
+                    changeStatus();
+                  }}
+                >
+                  Sửa Thông Tin
+                  <Icon name="users" />
+                </Button>
+                <Button.Or />
+                <Button
+                  positive
+                  icon
+                  floated="right"
+                  labelPosition="right"
+                  onClick={() => changePass()}
+                >
+                  Đổi Mật Khẩu
+                  <Icon name="unlock alternate" />
+                </Button>
+              </Button.Group>
             </Item.Extra>
           </Item.Content>
         </Item>
@@ -156,7 +170,7 @@ const Profile = () => {
     }
   };
   const changePass = () => {
-    setpass(true);
+    setpass(!pass);
   };
   const [formPass, setformPass] = useState({
     passwordOld: "",
@@ -199,7 +213,7 @@ const Profile = () => {
             onsubmitpass(e);
           }}
         >
-          <Segment>
+          <Segment color="red">
             <Form.Input
               fluid
               icon="lock"
@@ -315,19 +329,6 @@ const Profile = () => {
               </Button>
             </Segment>
           </Form>
-          <Message attached="bottom" warning>
-            <Icon name="help" />
-            Bạn có muốn?&nbsp;
-            <a
-              href="#"
-              onClick={() => {
-                changePass();
-              }}
-            >
-              đổi mật khẩu
-            </a>
-            &nbsp;ở đây.
-          </Message>
         </div>
       );
     }
@@ -346,10 +347,24 @@ const Profile = () => {
             />
             {display()}
           </Segment>
-          <br />
-          {displayForm()}
-          <br />
-          {displayFormChangePass()}
+          <Modal size="small" open={status} onClose={() => changeStatus()}>
+            <Modal.Header>Cập Nhật Thông Tin Cá Nhân</Modal.Header>
+            <Modal.Content>{displayForm()}</Modal.Content>
+            <Modal.Actions>
+              <Button color="red" onClick={() => changeStatus()}>
+                Hủy
+              </Button>
+            </Modal.Actions>
+          </Modal>
+          <Modal size="small" open={pass} onClose={() => changePass()}>
+            <Modal.Header>Thay Đổi Mật Khẩu</Modal.Header>
+            <Modal.Content>{displayFormChangePass()}</Modal.Content>
+            <Modal.Actions>
+              <Button color="red" onClick={() => changePass()}>
+                Hủy
+              </Button>
+            </Modal.Actions>
+          </Modal>
         </Grid.Column>
         <Grid.Column>
           <Segment secondary color="pink">

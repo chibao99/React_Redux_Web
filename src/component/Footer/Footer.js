@@ -1,6 +1,5 @@
 import React from "react";
 import { Segment, Container, Grid, Header, Button } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 
 const Footer = () => {
   return (

@@ -1,6 +1,5 @@
 import React from "react";
 import { Table, Header, Button, Segment, Icon } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import CartItems from "./CartItems";
 import CartResult from "./CartResult";
 import { useDispatch, useSelector } from "react-redux";

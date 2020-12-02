@@ -1,10 +1,8 @@
 import React from "react";
 import { Grid, Button, Image, Header, Segment, Label } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { useDispatch } from "react-redux";
 import { addcart } from "../../actions/cart";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Detail = ({ product }) => {
   //dispatch

@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
-import "semantic-ui-css/semantic.min.css";
 import { Menu } from "semantic-ui-react";
 import { useSelector } from "react-redux";
 import request from "../../actions/agent";
 import AdminProducts from "./AdminProducts";
 import AdminCustomer from "./AdminCustomer";
 import AdminPayments from "./AdminPayments";
+import { useHistory } from "react-router-dom";
 const AdminPage = () => {
   //state redux
   const products = useSelector((state) => state.product.products);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
   const [users, setusers] = useState([]);
   const [checkouts, setucheckouts] = useState([]);
+  const history = useHistory();
   useEffect(() => {
-    document.title = "Quản Lý"
+    if (!isAdmin) {
+      history.replace("/san-pham");
+    }
+    document.title = "Quản Lý";
     const fetchData = async () => {
       let data = await request.get("/users/getallcustomer");
       setusers(data);
@@ -22,7 +27,7 @@ const AdminPage = () => {
       setucheckouts(data);
     };
     fetchData();
-    fetchDataCh()
+    fetchDataCh();
   }, [products]);
   const [item, setitem] = useState({
     activeItem: "Sản Phẩm",

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import { Grid, Form, Button } from 'semantic-ui-react';
-import "semantic-ui-css/semantic.min.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({

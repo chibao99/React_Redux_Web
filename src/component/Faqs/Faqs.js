@@ -1,11 +1,8 @@
 import React,{useEffect} from "react";
 import { Header } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import "./style.css";
 const Faqs = () => {
-  useEffect(() => {
     document.title = "Faqs"
-  }, [])
   return (
     <div>
       <Header as="h2" textAlign="center" content="FAQS" className="s-text3" />
