@@ -22,15 +22,26 @@ const ProductItems = ({ product }) => {
   };
   const formatMonney = (num) =>
     num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  const discount = product.discount + "%";
+  const price =
+    product.discount === 0
+      ? product.price
+      : product.price - (product.price * product.discount) / 100;
   return (
     <Grid.Column style={{ marginBottom: "40px" }}>
       <Link to={`/san-pham/chi-tiet/${product._id}`}>
         <Card color={randomColor()}>
-          <Image size="medium" src={product.image} wrapped ui={false} />
+          <Image
+            size="medium"
+            src={product.image}
+            wrapped
+            ui={false}
+            label={{ corner: "right", content: discount, color: "red" }}
+          />
           <Card.Content>
             <Card.Header>{product.name}</Card.Header>
             <Card.Description>
-              {formatMonney(product.price)} VNĐ
+              {formatMonney(price)} VNĐ
             </Card.Description>
           </Card.Content>
         </Card>

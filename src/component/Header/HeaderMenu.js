@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Menu, Button, Icon, Image } from "semantic-ui-react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser, logout } from "../../actions/auth";
+import { logout, loadUser } from "../../actions/auth";
 
 const HeaderMenu = () => {
   //state redux
@@ -12,12 +12,11 @@ const HeaderMenu = () => {
   const dispatch = useDispatch();
   const logout1 = () => {
     dispatch(logout());
-    return history.push("/");
+    return history.replace("/");
   };
-
   useEffect(() => {
-      dispatch(loadUser());
-  }, []);
+    dispatch(loadUser());
+  }, [loadUser]);
   const display = () => {
     if (user) {
       return (

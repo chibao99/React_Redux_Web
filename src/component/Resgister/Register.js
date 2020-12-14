@@ -8,14 +8,18 @@ import {
   Button,
   Icon,
 } from "semantic-ui-react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/auth";
 import { toast } from "react-toastify";
 import quan from "./Address/quan_huyen.json";
 import tinh from "./Address/tinh_tp.json";
 const Register = () => {
-  document.title = "Đăng Ký"
+  const history = useHistory();
+  if(localStorage.getItem("token")){
+    history.replace("/san-pham")
+  }
+  document.title = "Đăng Ký";
   //state redux
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   //dispatch

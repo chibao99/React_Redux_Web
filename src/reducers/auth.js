@@ -46,6 +46,7 @@ export default (state = initiaState, action) => {
         isAuthenticated: true,
         loading: false,
         user: payload,
+        isAdmin: payload.isAdmin,
       };
     case LOGOUT:
       localStorage.removeItem("token");

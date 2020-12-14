@@ -1,7 +1,6 @@
 import React from "react";
 import { Table, Button, Icon, Image } from "semantic-ui-react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const CartItems = ({ cart, update, deleteCart }) => {
   const removeAndUpdateCart = (product, quantity) => {
@@ -13,13 +12,19 @@ const CartItems = ({ cart, update, deleteCart }) => {
       toast.success("Cập nhật giở hàng thành công!!!")
     }
   };
+  const formatMonney = (num) =>
+    num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  const price =
+    cart.product.discount === 0
+      ? cart.product.price
+      : cart.product.price - (cart.product.price * cart.product.discount) / 100;
   return (
     <Table.Row>
       <Table.Cell>
         <Image src={cart.product.image} size="tiny" />
       </Table.Cell>
       <Table.Cell>{cart.product.name}</Table.Cell>
-      <Table.Cell>{cart.product.price} VNĐ</Table.Cell>
+      <Table.Cell>{formatMonney(price)} VNĐ</Table.Cell>
       <Table.Cell>
         <span className="qty" style={{ marginRight: "10px" }}>
           {cart.quantity}
@@ -39,7 +44,7 @@ const CartItems = ({ cart, update, deleteCart }) => {
           </Button>
         </Button.Group>
       </Table.Cell>
-      <Table.Cell>{cart.product.price * cart.quantity} VNĐ</Table.Cell>
+      <Table.Cell>{formatMonney(price * cart.quantity)} VNĐ</Table.Cell>
     </Table.Row>
   );
 };

@@ -7,7 +7,6 @@ import {
   Icon,
   Item,
   Form,
-  Message,
   Modal,
 } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
@@ -86,6 +85,10 @@ const Profile = () => {
         return (
           <Segment key={index}>
             {checkout.cthd.map((ch, index) => {
+              const price =
+              ch.product.discount === 0
+                ? ch.product.price
+                : ch.product.price - (ch.product.price * ch.product.discount) / 100;
               return (
                 <Segment color="yellow" key={index}>
                   <Grid columns="3">
@@ -97,7 +100,7 @@ const Profile = () => {
                         <p>{ch.quantity}</p>
                       </Grid.Column>
                       <Grid.Column>
-                        <p>{ch.product.price}</p>
+                        <p>{formatMonney(price * ch.quantity)} VNĐ</p>
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>

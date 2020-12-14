@@ -25,9 +25,10 @@ const AdminProducts = ({ products }) => {
     inventory: "",
     desc: "",
     catalog: "",
+    discount: "",
     nameButton: "Thêm Sản Phẩm",
   });
-  const { name, price, inventory, desc, id, image, catalog } = form;
+  const { name, price, inventory, desc, id, image, catalog, discount } = form;
 
   const isChange = (e) => {
     switch (e.target.name) {
@@ -54,6 +55,7 @@ const AdminProducts = ({ products }) => {
       price: "",
       inventory: "",
       desc: "",
+      discount: "",
       nameButton: "Thêm Sản Phẩm",
     });
   };
@@ -67,6 +69,7 @@ const AdminProducts = ({ products }) => {
       price: p.price,
       inventory: p.inventory,
       desc: p.desc,
+      discount: p.discount,
       nameButton: "Cập Nhật",
     });
   };
@@ -79,6 +82,7 @@ const AdminProducts = ({ products }) => {
     formd.append("inventory", inventory);
     formd.append("desc", desc);
     formd.append("image", image);
+    formd.append("discount", discount);
     formd.append("catalog", catalog);
     if (id) {
       try {
@@ -98,8 +102,8 @@ const AdminProducts = ({ products }) => {
       try {
         const data = await request.post("/products", formd);
         if (data.msg) {
-          dispatch(fetch_data_all);
           setstatus(false);
+          window.location.reload(false);
         }
       } catch (err) {
         const errors = err.response.data.errors;
@@ -158,6 +162,7 @@ const AdminProducts = ({ products }) => {
               value={price}
               placeholder="Nhập giá sản phẩm"
               onChange={(e) => isChange(e)}
+              min="0"
             />
             <Form.Input
               fluid
@@ -166,6 +171,16 @@ const AdminProducts = ({ products }) => {
               value={inventory}
               placeholder="Nhập số lượng sản phẩm"
               onChange={(e) => isChange(e)}
+              min="0"
+            />
+            <Form.Input
+              fluid
+              type="number"
+              name="discount"
+              value={discount}
+              placeholder="Nhập % giảm giá"
+              onChange={(e) => isChange(e)}
+              min="0"
             />
             <Form.TextArea
               fluid
@@ -212,6 +227,7 @@ const AdminProducts = ({ products }) => {
               <Table.HeaderCell>Hình</Table.HeaderCell>
               <Table.HeaderCell>Tên Sản Phẩm</Table.HeaderCell>
               <Table.HeaderCell>Số Lượng Tồn</Table.HeaderCell>
+              <Table.HeaderCell>% Giảm Giá</Table.HeaderCell>
               <Table.HeaderCell>Giá</Table.HeaderCell>
               <Table.HeaderCell>Mô Tả</Table.HeaderCell>
               <Table.HeaderCell>Hành Động</Table.HeaderCell>
@@ -220,6 +236,10 @@ const AdminProducts = ({ products }) => {
 
           <Table.Body>
             {result.map((p, index) => {
+              const price =
+                p.discount === 0
+                  ? p.price
+                  : p.price - (p.price * p.discount) / 100;
               return (
                 <Table.Row key={index}>
                   <Table.Cell>{index + 1}</Table.Cell>
@@ -228,7 +248,8 @@ const AdminProducts = ({ products }) => {
                   </Table.Cell>
                   <Table.Cell>{p.name}</Table.Cell>
                   <Table.Cell>{p.inventory}</Table.Cell>
-                  <Table.Cell>{formatMonney(p.price)} VNĐ</Table.Cell>
+                  <Table.Cell>{p.discount}%</Table.Cell>
+                  <Table.Cell>{formatMonney(price)} VNĐ</Table.Cell>
                   <Table.Cell>{p.desc}</Table.Cell>
                   <Table.Cell>
                     <Button.Group>

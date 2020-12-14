@@ -1,4 +1,9 @@
-import { FETCH_PRODUCTS, EDIT_INVENTORY_SUCCESS, FETCH_PRODUCTS_ALL } from "../constant/AlertTypes";
+import {
+  FETCH_PRODUCTS,
+  EDIT_INVENTORY_SUCCESS,
+  FETCH_PRODUCTS_ALL,
+  UPDATE_NEW_PRODUCT,
+} from "../constant/AlertTypes";
 const initiaState = {
   products: [],
   totalPage: null,
@@ -21,6 +26,10 @@ const product = (state = initiaState, action) => {
       };
     case EDIT_INVENTORY_SUCCESS:
       return { ...state };
+    case UPDATE_NEW_PRODUCT:
+      return {
+        products: payload,
+      };
     default:
       return { ...state };
   }

@@ -1,4 +1,9 @@
-import { FETCH_PRODUCTS, EDIT_INVENTORY_SUCCESS, FETCH_PRODUCTS_ALL } from "../constant/AlertTypes";
+import {
+  FETCH_PRODUCTS,
+  EDIT_INVENTORY_SUCCESS,
+  FETCH_PRODUCTS_ALL,
+  UPDATE_NEW_PRODUCT
+} from "../constant/AlertTypes";
 import request from "./agent";
 
 //Fetch data
@@ -36,4 +41,12 @@ export const edit_inventory = ({ quantity }, id) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+export const addNewProduct = (oldData, newData) => async (dispatch) => {
+  let temp = [...oldData]
+  temp.products.push(newData);
+  dispatch({
+    type:UPDATE_NEW_PRODUCT,
+    payload:temp
+  })
 };

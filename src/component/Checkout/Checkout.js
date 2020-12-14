@@ -16,7 +16,12 @@ const Checkout = () => {
   const totalCart = (cart) => {
     let result = 0;
     cart.forEach((cart) => {
-      result += cart.product.price * cart.quantity;
+      result +=
+        cart.product.discount === 0
+          ? cart.product.price * cart.quantity
+          : (cart.product.price -
+              (cart.product.price * cart.product.discount) / 100) *
+            cart.quantity;
     });
     return result;
   };
@@ -86,6 +91,10 @@ const Checkout = () => {
           />
           <Segment color="grey">
             {cart.map((cart, index) => {
+              const price =
+              cart.product.discount === 0
+                ? cart.product.price
+                : cart.product.price - (cart.product.price * cart.product.discount) / 100;
               return (
                 <Grid key={index} columns={3}>
                   <Grid.Row>
@@ -96,7 +105,7 @@ const Checkout = () => {
                       <p>{cart.product.name}</p>
                     </Grid.Column>
                     <Grid.Column>
-                      <p>{cart.product.price}</p>
+                      <p>{price} VNĐ</p>
                     </Grid.Column>
                   </Grid.Row>
                 </Grid>

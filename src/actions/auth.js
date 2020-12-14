@@ -41,7 +41,6 @@ export const loadUser = () => async (dispatch) => {
   }
   try {
     const res = await request.get("/auth");
-
     dispatch({
       type: USER_LOAD,
       payload: res,

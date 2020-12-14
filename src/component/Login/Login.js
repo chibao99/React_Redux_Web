@@ -8,12 +8,16 @@ import {
   Button,
   Icon,
 } from "semantic-ui-react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect,useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../actions/auth";
 
 const Login = () => {
-  document.title = "Đăng Nhập"
+  const history = useHistory();
+  if(localStorage.getItem("token")){
+    history.replace("/san-pham")
+  }
+  document.title = "Đăng Nhập";
   //state redux
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const isAdmin = useSelector((state) => state.auth.isAdmin);

@@ -4,14 +4,17 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CartResult = () => {
-
   //state redux
-  const cart = useSelector(state => state.cart)
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const cart = useSelector((state) => state.cart);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const total = () => {
     let result = 0;
-    cart.forEach((element) => {
-      result += element.product.price * element.quantity;
+    cart.forEach((cart) => {
+      result +=
+        cart.product.discount === 0
+          ? cart.product.price * cart.quantity
+          : (cart.product.price -
+            (cart.product.price * cart.product.discount) / 100)*cart.quantity;
     });
     return result;
   };
@@ -71,5 +74,4 @@ const CartResult = () => {
   );
 };
 
-
-export default(CartResult);
+export default CartResult;

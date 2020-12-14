@@ -72,8 +72,11 @@ const AdminPayments = ({ checkouts }) => {
   const getTextSearch = (e) => {
     setSearch(e.target.value);
   };
+
+  let checkoutsPayment = checkouts.checkouts ? checkouts.checkouts : [];
+
   let result = [];
-  checkouts.checkouts.forEach((item) => {
+  checkoutsPayment.forEach((item) => {
     if (
       item.user.name.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
       item.user.phone.toLowerCase().indexOf(search.toLowerCase()) !== -1
@@ -93,12 +96,22 @@ const AdminPayments = ({ checkouts }) => {
         <Table textAlign="center" celled singleLine fixed>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell style={{width:"70px"}}>STT</Table.HeaderCell>
-              <Table.HeaderCell  style={{width:"350px"}}>Địa Chỉ</Table.HeaderCell>
-              <Table.HeaderCell  style={{width:"100px"}}>Ngày Đặt</Table.HeaderCell>
-              <Table.HeaderCell  style={{width:"100px"}}>Tổng Tiền</Table.HeaderCell>
-              <Table.HeaderCell  style={{width:"150px"}}>Trạng Thái Giao Hàng</Table.HeaderCell>
-              <Table.HeaderCell  style={{width:"180px"}}>Tên và Sdt Khách Hàng</Table.HeaderCell>
+              <Table.HeaderCell style={{ width: "70px" }}>STT</Table.HeaderCell>
+              <Table.HeaderCell style={{ width: "350px" }}>
+                Địa Chỉ
+              </Table.HeaderCell>
+              <Table.HeaderCell style={{ width: "100px" }}>
+                Ngày Đặt
+              </Table.HeaderCell>
+              <Table.HeaderCell style={{ width: "100px" }}>
+                Tổng Tiền
+              </Table.HeaderCell>
+              <Table.HeaderCell style={{ width: "150px" }}>
+                Trạng Thái Giao Hàng
+              </Table.HeaderCell>
+              <Table.HeaderCell style={{ width: "180px" }}>
+                Tên và Sdt Khách Hàng
+              </Table.HeaderCell>
               <Table.HeaderCell>Xác Nhận Giao Hàng</Table.HeaderCell>
             </Table.Row>
           </Table.Header>

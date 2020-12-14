@@ -5,6 +5,7 @@ import { addcart } from "../../actions/cart";
 import { toast } from "react-toastify";
 
 const Detail = ({ product }) => {
+  document.title = "Chi Tiết Sản Phẩm";
   //dispatch
   const dispatch = useDispatch();
   const themGioHang = (product) => {
@@ -17,16 +18,25 @@ const Detail = ({ product }) => {
   };
   const formatMonney = (num) =>
     num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  const discount = product.discount + "%";
+  const price =
+    product.discount === 0
+      ? product.price
+      : product.price - (product.price * product.discount) / 100;
   return (
     <Grid.Row>
       <Grid.Column>
-        <Image size="huge" src={product.image} />
+        <Image
+          fluid
+          src={product.image}
+          label={{ corner: "right", content: discount, color: "red" }}
+        />
       </Grid.Column>
       <Grid.Column>
         <div style={{ paddingLeft: "80px" }}>
           <Header as="h1" content={product.name} />
           <Label tag color="red" size="medium">
-            {formatMonney(product.price)} VND
+            {formatMonney(price)} VND
           </Label>
           <Label tag color="orange">
             Số lượng hàng: {product.inventory}

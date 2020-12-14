@@ -13,10 +13,10 @@ const AdminPage = () => {
   const [users, setusers] = useState([]);
   const [checkouts, setucheckouts] = useState([]);
   const history = useHistory();
+  if (isAdmin === false) {
+    history.replace("/san-pham");
+  }
   useEffect(() => {
-    if (!isAdmin) {
-      history.replace("/san-pham");
-    }
     document.title = "Quản Lý";
     const fetchData = async () => {
       let data = await request.get("/users/getallcustomer");
