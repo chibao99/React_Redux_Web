@@ -1,4 +1,9 @@
-import { ADD_CART, DELETE_CART, UPDATE_CART } from "../constant/AlertTypes";
+import {
+  ADD_CART,
+  DELETE_CART,
+  UPDATE_CART,
+  DELETE_ALL_CART,
+} from "../constant/AlertTypes";
 let data = JSON.parse(localStorage.getItem("cartReducers"));
 let initialState = data ? data : [];
 
@@ -29,6 +34,8 @@ export default (state = initialState, action) => {
       }
       localStorage.setItem("cartReducers", JSON.stringify(state));
       return [...state];
+    case DELETE_ALL_CART:
+      return [];
     default:
       return [...state];
   }

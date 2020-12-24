@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Container, Input } from "semantic-ui-react";
+import { Grid, Container, Input,Icon } from "semantic-ui-react";
 import ProductItems from "./ProductItems";
 import { useSelector } from "react-redux";
 
@@ -29,10 +29,10 @@ const Products = () => {
     <Container>
       <Input
         size="large"
-        loading
         placeholder="Search..."
         style={{ marginBottom: "20px" }}
         onChange={(e) => isChange(e)}
+        icon={<Icon name='search' inverted circular link />}
       />
       <Grid columns={4} stackable>
         <Grid.Row>

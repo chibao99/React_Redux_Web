@@ -12,7 +12,10 @@ const Cart = () => {
   const dispatch = useDispatch();
   const update = (product, quantity) => dispatch(updatecart(product, quantity));
   const deleteCart = (product) => dispatch(deletecart(product));
-  document.title = "Giỏ Hàng"
+  let data = JSON.parse(localStorage.getItem("cartReducers"))
+    ? JSON.parse(localStorage.getItem("cartReducers"))
+    : [];
+  document.title = "Giỏ Hàng";
   const display = () => {
     if (cart.length > 0) {
       return (
@@ -27,7 +30,7 @@ const Cart = () => {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {cart.map((product, index) => {
+            {data.map((product, index) => {
               return (
                 <CartItems
                   key={index}

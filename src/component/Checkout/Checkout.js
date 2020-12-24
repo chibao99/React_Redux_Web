@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { payment } from "../../actions/checkout";
 import { edit_inventory } from "../../actions/product";
 import { useHistory } from "react-router-dom";
+import { deleteAllCart } from "../../actions/cart";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   //state redux
@@ -46,6 +48,8 @@ const Checkout = () => {
     });
     dispatch(payment({ hd: { user, cthd, address, total } }));
     localStorage.removeItem("cartReducers");
+    dispatch(deleteAllCart());
+    toast.info("Bạn đã đặt hàng thành công");
     history.replace("/gio-hang");
   };
   const display = () => {
@@ -92,9 +96,10 @@ const Checkout = () => {
           <Segment color="grey">
             {cart.map((cart, index) => {
               const price =
-              cart.product.discount === 0
-                ? cart.product.price
-                : cart.product.price - (cart.product.price * cart.product.discount) / 100;
+                cart.product.discount === 0
+                  ? cart.product.price
+                  : cart.product.price -
+                    (cart.product.price * cart.product.discount) / 100;
               return (
                 <Grid key={index} columns={3}>
                   <Grid.Row>

@@ -40,9 +40,10 @@ const ProductItems = ({ product }) => {
           />
           <Card.Content>
             <Card.Header>{product.name}</Card.Header>
-            <Card.Description>
-              {formatMonney(price)} VNĐ
-            </Card.Description>
+            <Card.Meta style={{ textDecoration: "line-through" }}>
+              {formatMonney(product.price)} VNĐ
+            </Card.Meta>
+            <Card.Description>{formatMonney(price)} VNĐ</Card.Description>
           </Card.Content>
         </Card>
       </Link>
