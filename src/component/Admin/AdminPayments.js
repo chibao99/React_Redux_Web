@@ -10,6 +10,7 @@ import {
 } from "semantic-ui-react";
 import request from "../../actions/agent";
 const AdminPayments = ({ checkouts }) => {
+  let checkoutsPayment = checkouts.checkouts ? checkouts.checkouts : [];
   const edit = (name) => {
     if (name === false) {
       return (
@@ -72,8 +73,6 @@ const AdminPayments = ({ checkouts }) => {
   const getTextSearch = (e) => {
     setSearch(e.target.value);
   };
-
-  let checkoutsPayment = checkouts.checkouts ? checkouts.checkouts : [];
 
   let result = [];
   checkoutsPayment.forEach((item) => {

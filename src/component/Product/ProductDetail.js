@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Header } from "semantic-ui-react";
 import ProductRelation from "./ProductRelation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Detail from "./Detail";
+import Comment from "../Comment/CommentProduct";
+import { getCommentByProductID } from "../../actions/comment";
 
 const ProductDetail = ({ match }) => {
   //state redux
-  const products = useSelector(state => state.product.products,);
+  const products = useSelector((state) => state.product.products);
   //dispatch
+  const dispatch = useDispatch();
   const { id } = match.params;
   let dem = 0;
-
+  useEffect(() => {
+    dispatch(getCommentByProductID(id));
+  }, []);
+  const comment = useSelector((state) => state.comment);
   return (
     <div>
       <Grid columns={2} stackable>
@@ -20,6 +26,7 @@ const ProductDetail = ({ match }) => {
           }
         })}
       </Grid>
+      <Comment comment={comment} idP={id} />
       <Header
         textAlign="center"
         color="olive"
@@ -40,6 +47,4 @@ const ProductDetail = ({ match }) => {
   );
 };
 
-
-
-export default (ProductDetail);
+export default ProductDetail;

@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, Image, Grid } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getCommentByProductID } from "../../actions/comment";
 
 const ProductRelation = ({ product }) => {
   const formatMonney = (num) =>
@@ -10,9 +12,13 @@ const ProductRelation = ({ product }) => {
     product.discount === 0
       ? product.price
       : product.price - (product.price * product.discount) / 100;
+  const dispatch = useDispatch();
   return (
     <Grid.Column style={{ marginBottom: "40px" }}>
-      <Link to={`/san-pham/chi-tiet/${product._id}`}>
+      <Link
+        to={`/san-pham/chi-tiet/${product._id}`}
+        onClick={() => dispatch(getCommentByProductID(product._id))}
+      >
         <Card color="violet">
           <Image
             src={product.image}
@@ -22,7 +28,9 @@ const ProductRelation = ({ product }) => {
           />
           <Card.Content>
             <Card.Header>{product.name}</Card.Header>
-            <Card.Meta style={{textDecoration:"line-through"}}>{formatMonney(product.price)} VNĐ</Card.Meta>
+            <Card.Meta style={{ textDecoration: "line-through" }}>
+              {formatMonney(product.price)} VNĐ
+            </Card.Meta>
             <Card.Description>{formatMonney(price)} VNĐ</Card.Description>
           </Card.Content>
         </Card>

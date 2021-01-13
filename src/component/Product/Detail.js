@@ -1,10 +1,11 @@
 import React from "react";
 import { Grid, Button, Image, Header, Segment, Label } from "semantic-ui-react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addcart } from "../../actions/cart";
 import { toast } from "react-toastify";
 
 const Detail = ({ product }) => {
+
   document.title = "Chi Tiết Sản Phẩm";
   //dispatch
   const dispatch = useDispatch();

@@ -5,6 +5,7 @@ import product from "./product";
 import cart from "./cart";
 import checkout from "./checkout";
 import catalog from "./catalog";
+import comment from "./comment";
 
 const appReducer = combineReducers({
   alert,
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
   product,
   cart,
   checkout,
-  catalog
+  catalog,
+  comment,
 });
 export default appReducer;

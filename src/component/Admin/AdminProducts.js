@@ -13,7 +13,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import request from "../../actions/agent";
 import { toast } from "react-toastify";
-import { fetch_data_all } from "../../actions/product";
 const AdminProducts = ({ products }) => {
   const catalogs = useSelector((state) => state.catalog.catalog);
   const dispatch = useDispatch();
@@ -33,7 +32,7 @@ const AdminProducts = ({ products }) => {
   const isChange = (e) => {
     switch (e.target.name) {
       case "image":
-        setform({ [e.target.name]: e.target.files[0] });
+        setform({ ...form, [e.target.name]: e.target.files[0] });
         break;
       default:
         setform({ ...form, [e.target.name]: e.target.value });
@@ -76,6 +75,7 @@ const AdminProducts = ({ products }) => {
 
   const submitForm = async (e) => {
     e.preventDefault();
+    console.log("form", form);
     let formd = new FormData();
     formd.append("name", name);
     formd.append("price", price);
@@ -101,6 +101,7 @@ const AdminProducts = ({ products }) => {
     } else {
       try {
         const data = await request.post("/products", formd);
+        console.log(data);
         if (data.msg) {
           setstatus(false);
           window.location.reload(false);

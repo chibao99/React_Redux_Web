@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import Checkout from "./component/Checkout/Checkout";
 import Profile from "./component/Profile/Profile";
 import PrivateRoute from "./routing/PrivateRoute";
+import AdminRoute from "./routing/AdminRoute";
 import AdminPage from "./component/Admin/AdminPage";
 import { fetch_data_all } from "./actions/product";
 import { useDispatch } from "react-redux";
