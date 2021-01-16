@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Comment, Form, Header, Rating } from "semantic-ui-react";
 import request from "../../actions/agent";
 import { useDispatch } from "react-redux";
 import { getCommentByProductID } from "../../actions/comment";
 import { toast } from "react-toastify";
 const CommentProduct = ({ comment, idP }) => {
+  const history = useHistory();
   let comments = comment.comments ? comment.comments : [];
   const [formCommnet, setformCommnet] = useState({
     reply: "",
@@ -17,6 +19,14 @@ const CommentProduct = ({ comment, idP }) => {
   };
   const dispatch = useDispatch();
   const addResponse = async (productID, commentID) => {
+    if (!localStorage.getItem("token")) {
+      toast.error("Đăng nhập trước khi bình luận");
+      history.push("/dang-nhap");
+    }
+    if (reply === "") {
+      toast.error("Bình luận không rỗng");
+      return;
+    }
     const body = { content: reply };
     const res = await request.post(
       `/comments/addresponse/${productID}/${commentID}`,
@@ -31,6 +41,14 @@ const CommentProduct = ({ comment, idP }) => {
   };
 
   const addComment = async () => {
+    if (!localStorage.getItem("token")) {
+      toast.error("Đăng nhập trước khi bình luận");
+      history.push("/dang-nhap");
+    }
+    if (content === "") {
+      toast.error("Bình luận không để trống");
+      return;
+    }
     if (comments.length === 0) {
       let body = { product: idP, content: content };
       const res = await request.post("/comments/newcomments", body);
@@ -59,7 +77,7 @@ const CommentProduct = ({ comment, idP }) => {
         comments.map((com, index) => {
           return com.comments.map((comm, index1) => {
             return (
-              <Comment key={index1} >
+              <Comment key={index1}>
                 <Comment.Avatar as="a" src={comm.userComment.avatar} />
                 <Comment.Content>
                   <Comment.Author as="a">
