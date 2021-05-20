@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Comment, Form, Header, Rating } from "semantic-ui-react";
+import {
+  Button,
+  Comment,
+  Form,
+  Header,
+  Rating,
+  Modal,
+  Icon,
+  Segment,
+} from "semantic-ui-react";
 import request from "../../actions/agent";
 import { useDispatch } from "react-redux";
 import { getCommentByProductID } from "../../actions/comment";
 import { toast } from "react-toastify";
+
 const CommentProduct = ({ comment, idP }) => {
   const history = useHistory();
   let comments = comment.comments ? comment.comments : [];
   const [formCommnet, setformCommnet] = useState({
     reply: "",
     content: "",
-    raitng: 0,
   });
   const { reply, content } = formCommnet;
+  const [modal, setmodal] = useState(false);
+  const [rating, setrating] = useState(0);
   const isChange = (e) => {
     setformCommnet({ ...formCommnet, [e.target.name]: e.target.value });
   };
@@ -68,11 +79,50 @@ const CommentProduct = ({ comment, idP }) => {
     }
   };
 
+  //handel rate
+
+  const handelRate = (e, { rating }) => {
+    e.preventDefault();
+    setrating(rating);
+  };
+
+  const onHadleRating = () => {
+    
+  };
+  
+
   return (
     <Comment.Group>
       <Header as="h3" dividing>
         Bình Luận
       </Header>
+      <Modal
+        open={modal}
+        basic
+        onClose={() => setmodal(false)}
+        onOpen={() => setmodal(true)}
+      >
+        <Modal.Header>Bạn có muốn đánh giá sản phẩm này?</Modal.Header>
+        <Modal.Content>
+          <Segment placeholder color="yellow">
+            <Rating
+              icon="star"
+              size="massive"
+              onRate={handelRate}
+              defaultRating={rating}
+              maxRating={5}
+            />
+          </Segment>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button basic color="red" inverted onClick={() => setmodal(false)}>
+            <Icon name="remove" /> Hủy
+          </Button>
+          <Button color="green" inverted onClick={() => onHadleRating()}>
+            <Icon name="checkmark" /> ĐỒng Ý
+          </Button>
+        </Modal.Actions>
+      </Modal>
       {comments &&
         comments.map((com, index) => {
           return com.comments.map((comm, index1) => {
@@ -93,6 +143,7 @@ const CommentProduct = ({ comment, idP }) => {
                       defaultRating={comm.rating}
                       maxRating={5}
                       disabled
+                      onClick={() => setmodal(true)}
                     />
                   </Comment.Actions>
                 </Comment.Content>
@@ -137,6 +188,7 @@ const CommentProduct = ({ comment, idP }) => {
         })}
       <Form reply>
         <Form.TextArea
+          rows={1}
           name="content"
           value={content}
           onChange={(e) => isChange(e)}

@@ -25,7 +25,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetch_data_all());
     dispatch(getCatalog());
-  }, [fetch_data_all,getCatalog]);
+  }, [fetch_data_all, getCatalog]);
   return (
     <Router>
       <Fragment>

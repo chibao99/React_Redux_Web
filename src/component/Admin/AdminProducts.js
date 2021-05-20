@@ -15,7 +15,6 @@ import request from "../../actions/agent";
 import { toast } from "react-toastify";
 const AdminProducts = ({ products }) => {
   const catalogs = useSelector((state) => state.catalog.catalog);
-  const dispatch = useDispatch();
   const [form, setform] = useState({
     id: "",
     name: "",

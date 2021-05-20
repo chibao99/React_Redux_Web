@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "semantic-ui-css/semantic.min.css";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-const store = createStore(appReducer, composeEnhancer(applyMiddleware(thunk)));
+const store = createStore(appReducer, applyMiddleware(thunk));
 ReactDOM.render(
     <Provider store={store}>
       <App />

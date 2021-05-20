@@ -46,7 +46,7 @@ const Detail = ({ product }) => {
           <Segment color="green" secondary>
             <Button
               onClick={() => {
-                themGioHang(product, 1);
+                themGioHang(product);
               }}
               color="teal"
               fluid
